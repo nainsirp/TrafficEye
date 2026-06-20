@@ -160,7 +160,7 @@ export default function Dashboard({ onExitDashboard }: DashboardProps) {
           >
             <Home className="w-5 h-5 shrink-0 stroke-[2] text-[#00D4FF]" />
             {sidebarOpen && (
-              <span className="text-sm font-semibold">Return to Home</span>
+              <span className="text-sm font-semibold">Home</span>
             )}
           </button>
         </div>
