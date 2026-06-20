@@ -237,7 +237,7 @@ export default function LandingPage({ onEnterDashboard }: LandingPageProps) {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#0B1020] text-zinc-100 cyber-grid overflow-hidden">
+    <div className="flex flex-col min-h-screen bg-[#0B1020] text-zinc-100 cyber-grid overflow-x-hidden">
       
       {/* HEADER NAVBAR */}
       <header className="sticky top-0 z-50 glass-panel border-b border-white/5 py-4 px-6 md:px-12 flex justify-between items-center">
