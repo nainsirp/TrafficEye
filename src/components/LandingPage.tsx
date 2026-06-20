@@ -237,7 +237,12 @@ export default function LandingPage({ onEnterDashboard }: LandingPageProps) {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#0B1020] text-zinc-100 cyber-grid overflow-x-hidden">
+    <div className="flex flex-col min-h-screen bg-[#0B1020] text-zinc-100 overflow-x-hidden relative">
+      {/* Fixed background overlay grid & radial gradient */}
+      <div className="fixed inset-0 cyber-grid pointer-events-none z-0" />
+      
+      {/* Main Scrollable Content */}
+      <div className="relative z-10 flex flex-col w-full">
       
       {/* HEADER NAVBAR */}
       <header className="sticky top-0 z-50 glass-panel border-b border-white/5 py-4 px-6 md:px-12 flex justify-between items-center">
@@ -640,6 +645,7 @@ export default function LandingPage({ onEnterDashboard }: LandingPageProps) {
           </div>
         </div>
       </footer>
+      </div> {/* Closing main content wrapper */}
 
       {/* WATCH DEMO MODAL */}
       {showDemoModal && (

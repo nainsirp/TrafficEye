@@ -14,10 +14,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className="h-full antialiased dark"
+      className="dark"
       style={{ colorScheme: "dark" }}
     >
-      <body className="min-h-full flex flex-col bg-[#0B1020] text-zinc-100 selection:bg-[#00D4FF]/30 selection:text-white">
+      <body className="bg-[#0B1020] text-zinc-100 selection:bg-[#00D4FF]/30 selection:text-white">
         {children}
       </body>
     </html>
