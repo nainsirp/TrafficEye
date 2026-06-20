@@ -9,7 +9,7 @@ import {
   FileText, 
   UserCheck, 
   TrendingUp, 
-  LogOut,
+  Home,
   Cpu,
   Wifi,
   Shield,
@@ -101,13 +101,17 @@ export default function Dashboard({ onExitDashboard }: DashboardProps) {
       >
         {/* Brand/Logo Area */}
         <div className="p-6 border-b border-white/5 flex items-center justify-between">
-          <div className="flex items-center gap-3 overflow-hidden">
-            <div className="w-10 h-10 shrink-0 rounded-lg bg-gradient-to-tr from-[#3B82F6] to-[#00D4FF] flex items-center justify-center glow-border-cyan">
+          <div 
+            onClick={onExitDashboard}
+            className="flex items-center gap-3 overflow-hidden cursor-pointer group"
+            title="Return to Home"
+          >
+            <div className="w-10 h-10 shrink-0 rounded-lg bg-gradient-to-tr from-[#3B82F6] to-[#00D4FF] flex items-center justify-center glow-border-cyan group-hover:scale-105 transition-transform">
               <Eye className="w-6 h-6 text-[#0B1020] stroke-[2.5]" />
             </div>
             {sidebarOpen && (
               <div className="flex flex-col">
-                <span className="font-outfit font-extrabold text-sm tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00D4FF]">
+                <span className="font-outfit font-extrabold text-sm tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00D4FF] group-hover:text-[#00D4FF] transition-colors">
                   TRAFFIC-EYE
                 </span>
                 <span className="text-[10px] font-mono text-zinc-500 tracking-widest leading-none mt-0.5">
@@ -152,11 +156,11 @@ export default function Dashboard({ onExitDashboard }: DashboardProps) {
         <div className="p-4 border-t border-white/5">
           <button
             onClick={onExitDashboard}
-            className="w-full flex items-center gap-4 px-4 py-3 rounded-xl text-[#EF4444] hover:bg-[#EF4444]/10 transition-colors cursor-pointer border border-transparent hover:border-[#EF4444]/20"
+            className="w-full flex items-center gap-4 px-4 py-3 rounded-xl text-[#00D4FF] hover:bg-[#00D4FF]/10 transition-colors cursor-pointer border border-transparent hover:border-[#00D4FF]/20"
           >
-            <LogOut className="w-5 h-5 shrink-0 stroke-[2]" />
+            <Home className="w-5 h-5 shrink-0 stroke-[2] text-[#00D4FF]" />
             {sidebarOpen && (
-              <span className="text-sm font-semibold">Exit Platform</span>
+              <span className="text-sm font-semibold">Return to Home</span>
             )}
           </button>
         </div>
