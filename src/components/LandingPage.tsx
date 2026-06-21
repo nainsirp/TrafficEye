@@ -706,8 +706,8 @@ export default function LandingPage({ onEnterDashboard }: LandingPageProps) {
             {/* 2. LPR Subsystem Flowchart */}
             {activeArchTab === "lpr" && (
               <div className="space-y-6">
-                <h3 className="text-xl md:text-2xl font-outfit font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00D4FF] text-left tracking-wide mb-2">
-                  Module 8: License Plate Recognition Subsystem
+                <h3 className="text-xl md:text-2xl font-outfit font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00D4FF] text-left tracking-wide mb-8">
+                  License Plate Recognition Subsystem
                 </h3>
                 <div className="space-y-8">
                   {/* Horizontal flow blocks */}
@@ -782,8 +782,8 @@ export default function LandingPage({ onEnterDashboard }: LandingPageProps) {
             {/* 3. Human-in-the-Loop Workflow Branching */}
             {activeArchTab === "hitl" && (
               <div className="space-y-6">
-                <h3 className="text-xl md:text-2xl font-outfit font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00D4FF] text-left tracking-wide mb-2">
-                  Module 12: Human-in-the-Loop Verification Workflow
+                <h3 className="text-xl md:text-2xl font-outfit font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00D4FF] text-left tracking-wide mb-8">
+                  Human-in-the-Loop Verification Workflow
                 </h3>
                 <div className="space-y-8">
                   
