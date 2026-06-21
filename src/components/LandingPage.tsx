@@ -562,10 +562,10 @@ export default function LandingPage({ onEnterDashboard }: LandingPageProps) {
                 
                 {/* Heading info */}
                 <div className="space-y-2 mb-6 text-center">
-                  <h3 className="text-xl md:text-2xl font-outfit font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00D4FF] tracking-wide">
+                  <h3 className="text-xl md:text-2xl font-outfit font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00D4FF] text-center tracking-wide block w-full">
                     System Architecture: Core Ingestion Pipeline
                   </h3>
-                  <p className="text-zinc-400 text-sm font-light">
+                  <p className="text-zinc-400 text-sm font-light text-center block w-full">
                     13 sequential stages from raw RTSP video streams to real-time dashboard analytics. Click any node to inspect diagnostic logs.
                   </p>
                 </div>
@@ -706,7 +706,7 @@ export default function LandingPage({ onEnterDashboard }: LandingPageProps) {
             {/* 2. LPR Subsystem Flowchart */}
             {activeArchTab === "lpr" && (
               <div className="space-y-6">
-                <h3 className="text-xl md:text-2xl font-outfit font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00D4FF] text-center tracking-wide mb-8">
+                <h3 className="text-xl md:text-2xl font-outfit font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00D4FF] text-center tracking-wide mb-8 block w-full">
                   License Plate Recognition Subsystem
                 </h3>
                 <div className="space-y-8">
@@ -782,7 +782,7 @@ export default function LandingPage({ onEnterDashboard }: LandingPageProps) {
             {/* 3. Human-in-the-Loop Workflow Branching */}
             {activeArchTab === "hitl" && (
               <div className="space-y-6">
-                <h3 className="text-xl md:text-2xl font-outfit font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00D4FF] text-center tracking-wide mb-8">
+                <h3 className="text-xl md:text-2xl font-outfit font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00D4FF] text-center tracking-wide mb-8 block w-full">
                   Human-in-the-Loop Verification Workflow
                 </h3>
                 <div className="space-y-8">
