@@ -31,6 +31,8 @@ export default function LandingPage({ onEnterDashboard }: LandingPageProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [activePipelineStep, setActivePipelineStep] = useState(0);
   const [showDemoModal, setShowDemoModal] = useState(false);
+  const [activeArchTab, setActiveArchTab] = useState<"core" | "lpr" | "hitl">("core");
+  const [activeArchStep, setActiveArchStep] = useState(0);
 
   // Background Particle Animation
   useEffect(() => {
@@ -263,6 +265,7 @@ export default function LandingPage({ onEnterDashboard }: LandingPageProps) {
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
           <a href="#features" className="hover:text-[#00D4FF] transition-colors">Features</a>
           <a href="#pipeline" className="hover:text-[#00D4FF] transition-colors">AI Pipeline</a>
+          <a href="#architecture" className="hover:text-[#00D4FF] transition-colors">Architecture</a>
           <a href="#tech" className="hover:text-[#00D4FF] transition-colors">Technology</a>
           <a href="#impact" className="hover:text-[#00D4FF] transition-colors">Impact</a>
         </div>
@@ -498,6 +501,325 @@ export default function LandingPage({ onEnterDashboard }: LandingPageProps) {
               })}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* SYSTEM ARCHITECTURE SECTION */}
+      <section id="architecture" className="py-24 px-6 md:px-12 border-t border-white/5 relative">
+        <div className="max-w-7xl mx-auto space-y-16">
+          <div className="text-center max-w-3xl mx-auto space-y-4">
+            <h2 className="font-outfit font-extrabold text-4xl md:text-5xl">
+              System <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00D4FF] to-[#3B82F6]">Architecture</span>
+            </h2>
+            <p className="text-zinc-400 text-lg">
+              Detailed logical pipelines and branching decision frameworks driving autonomous smart city violation audits.
+            </p>
+
+            {/* Tab Switched Header buttons */}
+            <div className="flex justify-center gap-2 pt-4">
+              <button
+                onClick={() => setActiveArchTab("core")}
+                className={`px-5 py-2.5 rounded-xl text-xs font-bold font-mono border transition-all cursor-pointer
+                  ${activeArchTab === "core" 
+                    ? "bg-[#00D4FF]/10 border-[#00D4FF]/40 text-[#00D4FF]" 
+                    : "bg-white/5 border-transparent text-zinc-400 hover:text-white"
+                  }
+                `}
+              >
+                Core Ingestion Pipeline
+              </button>
+              <button
+                onClick={() => setActiveArchTab("lpr")}
+                className={`px-5 py-2.5 rounded-xl text-xs font-bold font-mono border transition-all cursor-pointer
+                  ${activeArchTab === "lpr" 
+                    ? "bg-[#00D4FF]/10 border-[#00D4FF]/40 text-[#00D4FF]" 
+                    : "bg-white/5 border-transparent text-zinc-400 hover:text-white"
+                  }
+                `}
+              >
+                ANPR / LPR Subsystem
+              </button>
+              <button
+                onClick={() => setActiveArchTab("hitl")}
+                className={`px-5 py-2.5 rounded-xl text-xs font-bold font-mono border transition-all cursor-pointer
+                  ${activeArchTab === "hitl" 
+                    ? "bg-[#00D4FF]/10 border-[#00D4FF]/40 text-[#00D4FF]" 
+                    : "bg-white/5 border-transparent text-zinc-400 hover:text-white"
+                  }
+                `}
+              >
+                Human-in-the-Loop Workflow
+              </button>
+            </div>
+          </div>
+
+          {/* Render Active Flowchart Content */}
+          <div className="mt-8">
+            
+            {/* 1. Core Ingestion Pipeline Diagram */}
+            {activeArchTab === "core" && (
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                
+                {/* Stepper Steps (Col 6) */}
+                <div className="lg:col-span-7 glass-panel rounded-3xl p-6 max-h-[500px] overflow-y-auto no-scrollbar space-y-3 relative">
+                  <div className="absolute left-9 top-6 bottom-6 w-0.5 bg-white/5 z-0" />
+                  
+                  {[
+                    { title: "Traffic Camera Image", desc: "4K live stream raw CCTV capture frames." },
+                    { title: "Image Quality Assessment", desc: "Auto-analyzes contrast, blur, resolution, and exposure levels." },
+                    { title: "Adaptive Enhancement Engine", desc: "Applies night-vision boosts, fog filters, and resolution scaling." },
+                    { title: "Scene Understanding Module", desc: "Calibrates perspective matrices, ROI boundaries, and lanes." },
+                    { title: "Vehicle & Road User Detection", desc: "Segments cars, trucks, motorcycles, and pedestrians via YOLOv11." },
+                    { title: "Object Tracking Engine", desc: "Establishes unique tracking IDs across frames using ByteTrack." },
+                    { title: "Multi-Agent Violation Detection", desc: "Runs specialized models checking red lights, helmets, and speed." },
+                    { title: "Confidence Fusion Engine", desc: "Aggregates temporal frame indicators to filter transient noise." },
+                    { title: "License Plate Recognition", desc: "Localizes and OCR-scans characters using PaddleOCR & TrOCR." },
+                    { title: "Evidence Generation Engine", desc: "Packs overlays, speed telemetry, timestamp, and signature crop." },
+                    { title: "Severity Scoring Engine", desc: "Calculates risk hazard index (1-100) based on speed and density." },
+                    { title: "Human Verification Layer", desc: "Pushes flagged packages to officer audit queues." },
+                    { title: "Traffic Intelligence Dashboard", desc: "Dispatches database writes to populate analytics panels." }
+                  ].map((step, idx) => {
+                    const isActive = activeArchStep === idx;
+                    return (
+                      <button
+                        key={idx}
+                        onClick={() => setActiveArchStep(idx)}
+                        className={`w-full flex gap-4 text-left p-3 rounded-2xl border transition-all cursor-pointer relative z-10
+                          ${isActive 
+                            ? "bg-[#00D4FF]/10 border-[#00D4FF]/30 text-white" 
+                            : "bg-white/5 border-transparent text-zinc-400 hover:text-white"
+                          }
+                        `}
+                      >
+                        <span className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold font-mono shrink-0
+                          ${isActive 
+                            ? "bg-gradient-to-tr from-[#00D4FF] to-[#3B82F6] text-[#0B1020]" 
+                            : "bg-zinc-900 border border-white/5 text-zinc-400"
+                          }
+                        `}>
+                          {idx + 1}
+                        </span>
+                        <div className="space-y-0.5">
+                          <h4 className="text-xs font-bold font-mono uppercase tracking-wide">{step.title}</h4>
+                          <p className="text-[11px] text-zinc-400 font-light">{step.desc}</p>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Diagnostic Monitor Logs (Col 5) */}
+                <div className="lg:col-span-5 glass-panel rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden min-h-[300px]">
+                  <div className="laser-scanner" />
+                  
+                  <div className="space-y-6">
+                    <div className="flex justify-between items-center border-b border-white/5 pb-4">
+                      <span className="text-xs font-mono font-bold text-[#00D4FF] uppercase tracking-wider">Node Diagnostic logs</span>
+                      <span className="text-[9px] font-mono text-zinc-500">STEP_0{activeArchStep + 1} // ACTIVE</span>
+                    </div>
+
+                    <div className="font-mono text-[11px] text-zinc-400 space-y-3 bg-[#0B1020]/75 p-4 rounded-2xl border border-white/5">
+                      <p className="text-zinc-500">// INITIALIZING VALIDATION PROFILES...</p>
+                      <p><span className="text-[#3b82f6]">NODE_NAME:</span> {[
+                        "CAMERA_INGEST_NODE", "QUALITY_AUDIT_NODE", "ADAPTIVE_FILTER_NODE", "CALIBRATION_GEOMETRY_NODE", 
+                        "YOLO_OBJECT_NODE", "TEMPORAL_TRACK_NODE", "VIOLATION_CLASSIFICATION_NODE", "FUSION_FILTER_NODE", 
+                        "ANPR_OCR_NODE", "EVIDENCE_COMPACTOR_NODE", "SEVERITY_SCORING_NODE", "HUMAN_AUDIT_NODE", "ANALYTICS_WRITE_NODE"
+                      ][activeArchStep]}</p>
+                      <p><span className="text-[#3b82f6]">CPU_LATENCY:</span> {[
+                        "12ms", "8ms", "15ms", "6ms", "28ms", "14ms", "32ms", "5ms", "42ms", "18ms", "4ms", "Variable", "10ms"
+                      ][activeArchStep]}</p>
+                      <p><span className="text-[#3b82f6]">PACKET_STATUS:</span> <span className="text-[#22C55E] uppercase font-bold">Inbound Success</span></p>
+                      <p className="text-zinc-500">// RUNNING SYSTEM HEURISTICS...</p>
+                      <p className="text-zinc-300">
+                        {[
+                          "Captured frames buffered at 4K @ 60fps.",
+                          "Blur score: 0.14 (Compliant). Exposure: 0.78 (Optimal).",
+                          "Night-vision gain: 0.0dB. Contrast ratio normalized.",
+                          "Junction homography matrix established: [[1.2,0.4], [0.1,1.5]].",
+                          "Detections buffered: 8 vehicles, 2 riders.",
+                          "ByteTrack Kalman filters initialized. Maintaining 8 active paths.",
+                          "Multi-agent trigger: Red-light breach coordinates scanned.",
+                          "Aggregated anomaly index: 0.94 probability of violation.",
+                          "PaddleOCR character confidence: 98.4%. TrOCR model validation complete.",
+                          "Generated visual citation package under ID: TR-2026-904.",
+                          "Calculated severity score: 95/100 (Critical classification).",
+                          "Queue payload pushed. Officer notification dispatched.",
+                          "JSON payload formatted. Dispatched PostgreSQL writing buffers."
+                        ][activeArchStep]}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="bg-[#111827]/70 border border-white/5 rounded-2xl p-4 flex items-center gap-3.5 mt-6 z-10">
+                    <Cpu className="w-5 h-5 text-[#00D4FF] shrink-0" />
+                    <div>
+                      <span className="text-[10px] text-zinc-300 font-mono font-bold uppercase block">Logical Flow state</span>
+                      <span className="text-[10px] text-zinc-500 font-light block leading-relaxed mt-0.5">
+                        Data flows vertically, triggering sequential neural evaluations. Output acts as input for the sibling node.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            )}
+
+            {/* 2. LPR Subsystem Flowchart */}
+            {activeArchTab === "lpr" && (
+              <div className="space-y-8">
+                {/* Horizontal flow blocks */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+                  
+                  {[
+                    { step: "Vehicle Detection", model: "YOLOv11 Chassis localization", icon: Video },
+                    { step: "Plate Detection", model: "Spatial region segmentation", icon: Eye },
+                    { step: "OCR Engine", model: "PaddleOCR / TrOCR parsing", icon: Cpu },
+                    { step: "Validation", model: "MVA state registry match", icon: FileText }
+                  ].map((block, idx) => {
+                    const Icon = block.icon;
+                    return (
+                      <div 
+                        key={idx} 
+                        className="glass-panel rounded-2xl p-6 flex flex-col items-center text-center gap-4 border border-white/5 hover:border-[#00D4FF]/20 transition-all relative"
+                      >
+                        {/* Glowing Index Badge */}
+                        <span className="absolute -top-3.5 bg-gradient-to-tr from-[#3B82F6] to-[#00D4FF] text-[#0B1020] text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">
+                          Stage 0{idx + 1}
+                        </span>
+
+                        <div className="p-3.5 rounded-xl bg-[#00D4FF]/5 border border-[#00D4FF]/10 text-[#00D4FF] mt-2">
+                          <Icon className="w-5 h-5 stroke-[2]" />
+                        </div>
+                        
+                        <div className="space-y-1">
+                          <h4 className="font-outfit font-bold text-white text-sm">{block.step}</h4>
+                          <p className="text-zinc-500 text-[11px] font-mono">{block.model}</p>
+                        </div>
+
+                        {/* Right connection arrow for desktop */}
+                        {idx < 3 && (
+                          <div className="hidden md:block absolute top-[50%] -translate-y-1/2 -right-3 text-[#00D4FF]/30 text-base font-mono z-20">
+                            &rarr;
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* OCR Models details */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                  <div className="glass-panel rounded-2xl p-5 border border-white/5 flex gap-4 items-start">
+                    <div className="p-2.5 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/10 shrink-0 font-mono text-xs font-bold">
+                      OCR_1
+                    </div>
+                    <div className="space-y-1">
+                      <h5 className="font-bold text-white text-sm">PaddleOCR Model Integration</h5>
+                      <p className="text-zinc-400 text-xs font-light leading-relaxed">
+                        High-speed text detector optimized for mobile and edge deployment, ensuring sub-10ms latency for real-time video stream plates tracking.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="glass-panel rounded-2xl p-5 border border-white/5 flex gap-4 items-start">
+                    <div className="p-2.5 rounded-lg bg-purple-500/10 text-purple-400 border border-purple-500/10 shrink-0 font-mono text-xs font-bold">
+                      OCR_2
+                    </div>
+                    <div className="space-y-1">
+                      <h5 className="font-bold text-white text-sm">TrOCR (Transformer OCR) Engine</h5>
+                      <p className="text-zinc-400 text-xs font-light leading-relaxed">
+                        Attention-based transformer architecture that yields superior accuracy in tough frames (skewed angles, heavy rain, or low-light night conditions).
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* 3. Human-in-the-Loop Workflow Branching */}
+            {activeArchTab === "hitl" && (
+              <div className="space-y-8">
+                
+                {/* Decision Branching Flow diagram */}
+                <div className="glass-panel rounded-3xl p-6 flex flex-col gap-6 relative overflow-hidden">
+                  
+                  {/* Central Node */}
+                  <div className="flex flex-col items-center text-center max-w-xs mx-auto p-4 bg-zinc-900/80 border border-white/10 rounded-2xl relative z-10 shadow-lg">
+                    <span className="text-[10px] font-mono text-[#3B82F6] uppercase tracking-wider font-bold">Inference Ingestion</span>
+                    <h4 className="font-bold text-white text-sm mt-1">AI Violation Evaluator</h4>
+                    <p className="text-[10px] text-zinc-500 font-light mt-0.5">Confidence Assessment Threshold checks</p>
+                  </div>
+
+                  {/* Connecting lines for branching */}
+                  <div className="relative h-12 w-full max-w-xl mx-auto hidden md:block">
+                    <svg className="w-full h-full" viewBox="0 0 200 40">
+                      <path d="M 100 0 L 100 20 L 20 20 L 20 40 M 100 20 L 100 40 M 100 20 L 180 20 L 180 40" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="1.5" />
+                    </svg>
+                  </div>
+
+                  {/* Branches Row */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+                    
+                    {/* Branch 1: High */}
+                    <div className="bg-[#22C55E]/5 border border-[#22C55E]/20 hover:border-[#22C55E]/40 rounded-2xl p-5 flex flex-col items-center text-center gap-3 transition-all relative">
+                      <span className="text-[9px] font-mono font-bold bg-[#22C55E]/10 text-[#22C55E] px-2 py-0.5 rounded border border-[#22C55E]/20 uppercase">
+                        High Confidence (&ge;90%)
+                      </span>
+                      <h5 className="font-bold text-white text-sm">Automatic Citation Dispatch</h5>
+                      <p className="text-zinc-400 text-xs font-light leading-relaxed">
+                        Ticket is automatically processed, digitally signed, and dispatched to vehicle registry data. Zero manual audit required.
+                      </p>
+                    </div>
+
+                    {/* Branch 2: Medium */}
+                    <div className="bg-[#F59E0B]/5 border border-[#F59E0B]/20 hover:border-[#F59E0B]/40 rounded-2xl p-5 flex flex-col items-center text-center gap-3 transition-all relative">
+                      <span className="text-[9px] font-mono font-bold bg-[#F59E0B]/10 text-[#F59E0B] px-2 py-0.5 rounded border border-[#F59E0B]/20 uppercase">
+                        Medium Confidence (40% - 90%)
+                      </span>
+                      <h5 className="font-bold text-white text-sm">Human Verification Queue</h5>
+                      <p className="text-zinc-400 text-xs font-light leading-relaxed">
+                        Pushed to the Officer Review Portal for manual validation. AI visual overlays assist the officer in single-click decisions.
+                      </p>
+                    </div>
+
+                    {/* Branch 3: Low */}
+                    <div className="bg-[#EF4444]/5 border border-[#EF4444]/20 hover:border-[#EF4444]/40 rounded-2xl p-5 flex flex-col items-center text-center gap-3 transition-all relative">
+                      <span className="text-[9px] font-mono font-bold bg-[#EF4444]/10 text-[#EF4444] px-2 py-0.5 rounded border border-[#EF4444]/20 uppercase">
+                        Low Confidence (&lt;40%)
+                      </span>
+                      <h5 className="font-bold text-white text-sm">Auto-Reject Pipeline</h5>
+                      <p className="text-zinc-400 text-xs font-light leading-relaxed">
+                        Filtered out automatically as transient sensor noise or a false positive. Citation discarded from system logs.
+                      </p>
+                    </div>
+
+                  </div>
+                </div>
+
+                {/* HITL Benefits grid layout */}
+                <div className="space-y-4">
+                  <h5 className="text-xs font-bold text-zinc-400 uppercase font-mono tracking-wider text-center">Platform Security Benefits</h5>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="glass-panel rounded-xl p-5 border border-white/5 flex flex-col gap-1.5 items-center text-center">
+                      <span className="font-bold text-white text-sm font-outfit">Fewer False Challans</span>
+                      <p className="text-zinc-400 text-xs font-light">Double-layered operator check filters ambiguities, reducing public disputes.</p>
+                    </div>
+                    <div className="glass-panel rounded-xl p-5 border border-white/5 flex flex-col gap-1.5 items-center text-center">
+                      <span className="font-bold text-white text-sm font-outfit">Higher System Trust</span>
+                      <p className="text-zinc-400 text-xs font-light">Human-in-the-loop ensures legal backing, increasing citizen compliance trust.</p>
+                    </div>
+                    <div className="glass-panel rounded-xl p-5 border border-white/5 flex flex-col gap-1.5 items-center text-center">
+                      <span className="font-bold text-white text-sm font-outfit">Regulatory Compliance</span>
+                      <p className="text-zinc-400 text-xs font-light">Aligns with global CJIS and security mandates for smart city operations.</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            )}
+
+          </div>
+
         </div>
       </section>
 
