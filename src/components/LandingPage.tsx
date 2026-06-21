@@ -561,7 +561,7 @@ export default function LandingPage({ onEnterDashboard }: LandingPageProps) {
               <div className="space-y-6">
                 
                 {/* Heading info */}
-                <div className="space-y-2 mb-6">
+                <div className="space-y-2 mb-6 text-center">
                   <h3 className="text-xl md:text-2xl font-outfit font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00D4FF] tracking-wide">
                     System Architecture: Core Ingestion Pipeline
                   </h3>
@@ -706,7 +706,7 @@ export default function LandingPage({ onEnterDashboard }: LandingPageProps) {
             {/* 2. LPR Subsystem Flowchart */}
             {activeArchTab === "lpr" && (
               <div className="space-y-6">
-                <h3 className="text-xl md:text-2xl font-outfit font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00D4FF] text-left tracking-wide mb-8">
+                <h3 className="text-xl md:text-2xl font-outfit font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00D4FF] text-center tracking-wide mb-8">
                   License Plate Recognition Subsystem
                 </h3>
                 <div className="space-y-8">
@@ -782,7 +782,7 @@ export default function LandingPage({ onEnterDashboard }: LandingPageProps) {
             {/* 3. Human-in-the-Loop Workflow Branching */}
             {activeArchTab === "hitl" && (
               <div className="space-y-6">
-                <h3 className="text-xl md:text-2xl font-outfit font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00D4FF] text-left tracking-wide mb-8">
+                <h3 className="text-xl md:text-2xl font-outfit font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00D4FF] text-center tracking-wide mb-8">
                   Human-in-the-Loop Verification Workflow
                 </h3>
                 <div className="space-y-8">
