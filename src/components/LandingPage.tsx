@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, Fragment } from "react";
 import { motion } from "framer-motion";
 import { 
   Eye, 
@@ -559,94 +559,116 @@ export default function LandingPage({ onEnterDashboard }: LandingPageProps) {
             {/* 1. Core Ingestion Pipeline Diagram */}
             {activeArchTab === "core" && (
               <div className="space-y-6">
-                <h3 className="text-xl md:text-2xl font-outfit font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00D4FF] text-left tracking-wide mb-2">
-                  System Architecture: Core Ingestion Pipeline
-                </h3>
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                
+                {/* Heading info */}
+                <div className="space-y-2 mb-6">
+                  <h3 className="text-xl md:text-2xl font-outfit font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00D4FF] tracking-wide">
+                    System Architecture: Core Ingestion Pipeline
+                  </h3>
+                  <p className="text-zinc-400 text-sm font-light">
+                    13 sequential stages from raw RTSP video streams to real-time dashboard analytics. Click any node to inspect diagnostic logs.
+                  </p>
+                </div>
+
+                {/* Horizontal flow blocks wrapper */}
+                <div className="flex flex-wrap items-center gap-y-3.5 gap-x-2 bg-[#0B1020]/30 border border-white/5 rounded-3xl p-5 justify-center">
+                  {[
+                    { title: "Traffic Camera Image", desc: "4K live stream raw CCTV capture frames." },
+                    { title: "Image Quality Assessment", desc: "Auto-analyzes contrast, blur, resolution, and exposure levels." },
+                    { title: "Adaptive Enhancement Engine", desc: "Applies night-vision boosts, fog filters, and resolution scaling." },
+                    { title: "Scene Understanding Module", desc: "Calibrates perspective matrices, ROI boundaries, and lanes." },
+                    { title: "Vehicle & Road User Detection", desc: "Segments cars, trucks, motorcycles, and pedestrians via YOLOv11." },
+                    { title: "Object Tracking Engine", desc: "Establishes unique tracking IDs across frames using ByteTrack." },
+                    { title: "Multi-Agent Violation Detection", desc: "Runs specialized models checking red lights, helmets, and speed." },
+                    { title: "Confidence Fusion Engine", desc: "Aggregates temporal frame indicators to filter transient noise." },
+                    { title: "License Plate Recognition", desc: "Localizes and OCR-scans characters using PaddleOCR & TrOCR." },
+                    { title: "Evidence Generation Engine", desc: "Packs overlays, speed telemetry, timestamp, and signature crop." },
+                    { title: "Severity Scoring Engine", desc: "Calculates risk hazard index (1-100) based on speed and density." },
+                    { title: "Human Verification Layer", desc: "Pushes flagged packages to officer audit queues." },
+                    { title: "Traffic Intelligence Dashboard", desc: "Dispatches database writes to populate analytics panels." }
+                  ].map((step, idx) => (
+                    <Fragment key={idx}>
+                      <button
+                        onClick={() => setActiveArchStep(idx)}
+                        className={`flex items-center gap-2.5 py-2 px-3.5 rounded-xl border transition-all cursor-pointer text-left relative max-w-[220px] min-w-[170px]
+                          ${activeArchStep === idx 
+                            ? "bg-[#00D4FF]/10 border-[#00D4FF]/40 text-white shadow-[0_0_15px_rgba(0,212,255,0.1)]" 
+                            : "bg-white/5 border-transparent text-zinc-400 hover:text-white"
+                          }
+                        `}
+                      >
+                        <span className={`w-5.5 h-5.5 rounded-full flex items-center justify-center text-[10px] font-bold font-mono shrink-0
+                          ${activeArchStep === idx 
+                            ? "bg-gradient-to-tr from-[#00D4FF] to-[#3B82F6] text-[#0B1020]" 
+                            : "bg-zinc-900 border border-white/10 text-zinc-400"
+                          }
+                        `}>
+                          {idx + 1}
+                        </span>
+                        <span className="text-[10px] font-mono uppercase tracking-wide truncate">{step.title}</span>
+                      </button>
+                      {idx < 12 && (
+                        <span className="text-[#00D4FF]/40 font-mono text-sm shrink-0 mx-1 select-none">
+                          &rarr;
+                        </span>
+                      )}
+                    </Fragment>
+                  ))}
+                </div>
+
+                {/* Diagnostic Monitor Logs (Full Width below) */}
+                <div className="glass-panel rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden mt-6 min-h-[220px]">
+                  <div className="laser-scanner" />
                   
-                  {/* Stepper Steps (Col 7) */}
-                  <div className="lg:col-span-7 glass-panel rounded-3xl p-4 space-y-1 relative">
-                    <div className="absolute left-9 top-6 bottom-6 w-0.5 bg-white/5 z-0" />
-                    
-                    {[
-                      { title: "Traffic Camera Image", desc: "4K live stream raw CCTV capture frames." },
-                      { title: "Image Quality Assessment", desc: "Auto-analyzes contrast, blur, resolution, and exposure levels." },
-                      { title: "Adaptive Enhancement Engine", desc: "Applies night-vision boosts, fog filters, and resolution scaling." },
-                      { title: "Scene Understanding Module", desc: "Calibrates perspective matrices, ROI boundaries, and lanes." },
-                      { title: "Vehicle & Road User Detection", desc: "Segments cars, trucks, motorcycles, and pedestrians via YOLOv11." },
-                      { title: "Object Tracking Engine", desc: "Establishes unique tracking IDs across frames using ByteTrack." },
-                      { title: "Multi-Agent Violation Detection", desc: "Runs specialized models checking red lights, helmets, and speed." },
-                      { title: "Confidence Fusion Engine", desc: "Aggregates temporal frame indicators to filter transient noise." },
-                      { title: "License Plate Recognition", desc: "Localizes and OCR-scans characters using PaddleOCR & TrOCR." },
-                      { title: "Evidence Generation Engine", desc: "Packs overlays, speed telemetry, timestamp, and signature crop." },
-                      { title: "Severity Scoring Engine", desc: "Calculates risk hazard index (1-100) based on speed and density." },
-                      { title: "Human Verification Layer", desc: "Pushes flagged packages to officer audit queues." },
-                      { title: "Traffic Intelligence Dashboard", desc: "Dispatches database writes to populate analytics panels." }
-                    ].map((step, idx) => {
-                      const isActive = activeArchStep === idx;
-                      return (
-                        <button
-                          key={idx}
-                          onClick={() => setActiveArchStep(idx)}
-                          className={`w-full flex gap-3.5 items-center text-left py-1 px-3 rounded-lg border transition-all cursor-pointer relative z-10
-                            ${isActive 
-                              ? "bg-[#00D4FF]/10 border-[#00D4FF]/30 text-white font-bold" 
-                              : "bg-white/5 border-transparent text-zinc-400 hover:text-white"
-                            }
-                          `}
-                        >
-                          <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-bold font-mono shrink-0
-                            ${isActive 
-                              ? "bg-gradient-to-tr from-[#00D4FF] to-[#3B82F6] text-[#0B1020]" 
-                              : "bg-zinc-900 border border-white/5 text-zinc-400"
-                            }
-                          `}>
-                            {idx + 1}
-                          </span>
-                          <span className="text-[10px] font-mono uppercase tracking-wide truncate">{step.title}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  {/* Diagnostic Monitor Logs (Col 5) */}
-                  <div className="lg:col-span-5 glass-panel rounded-3xl p-5 flex flex-col justify-between relative overflow-hidden h-full">
-                    <div className="laser-scanner" />
-                    
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-center border-b border-white/5 pb-3">
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center border-b border-white/5 pb-3">
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                         <span className="text-xs font-mono font-bold text-[#00D4FF] uppercase tracking-wider">Node Diagnostic logs</span>
-                        <span className="text-[9px] font-mono text-zinc-500">STEP_0{activeArchStep + 1} // ACTIVE</span>
                       </div>
+                      <span className="text-[9px] font-mono text-zinc-500">STEP_0{activeArchStep + 1} // ACTIVE</span>
+                    </div>
 
-                      <div className="font-mono text-[11px] text-zinc-400 space-y-2.5 bg-[#0B1020]/75 p-4 rounded-2xl border border-white/5">
-                        <p className="text-zinc-500">// INITIALIZING VALIDATION PROFILES...</p>
-                        <p><span className="text-[#3b82f6]">NODE_NAME:</span> {[
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 font-mono text-[11px] text-zinc-400 bg-[#0B1020]/75 p-5 rounded-2xl border border-white/5">
+                      <div>
+                        <span className="text-[#3b82f6] block mb-1">NODE_NAME:</span>
+                        <span className="text-white font-bold">{[
                           "CAMERA_INGEST_NODE", "QUALITY_AUDIT_NODE", "ADAPTIVE_FILTER_NODE", "CALIBRATION_GEOMETRY_NODE", 
                           "YOLO_OBJECT_NODE", "TEMPORAL_TRACK_NODE", "VIOLATION_CLASSIFICATION_NODE", "FUSION_FILTER_NODE", 
                           "ANPR_OCR_NODE", "EVIDENCE_COMPACTOR_NODE", "SEVERITY_SCORING_NODE", "HUMAN_AUDIT_NODE", "ANALYTICS_WRITE_NODE"
-                        ][activeArchStep]}</p>
-                        <p><span className="text-[#3b82f6]">FUNCTION:</span> {[
-                          "4K live stream raw CCTV capture frames.",
-                          "Auto-analyzes contrast, blur, resolution, and exposure levels.",
-                          "Applies night-vision boosts, fog filters, and resolution scaling.",
-                          "Calibrates perspective matrices, ROI boundaries, and lanes.",
-                          "Segments cars, trucks, motorcycles, and pedestrians via YOLOv11.",
-                          "Establishes unique tracking IDs across frames using ByteTrack.",
-                          "Runs specialized models checking red lights, helmets, and speed.",
-                          "Aggregates temporal frame indicators to filter transient noise.",
-                          "Localizes and OCR-scans characters using PaddleOCR & TrOCR.",
-                          "Packs overlays, speed telemetry, timestamp, and signature crop.",
-                          "Calculates risk hazard index (1-100) based on speed and density.",
-                          "Pushes flagged packages to officer audit queues.",
-                          "Dispatches database writes to populate analytics panels."
-                        ][activeArchStep]}</p>
-                        <p><span className="text-[#3b82f6]">CPU_LATENCY:</span> {[
+                        ][activeArchStep]}</span>
+                      </div>
+                      <div>
+                        <span className="text-[#3b82f6] block mb-1">CPU_LATENCY:</span>
+                        <span className="text-white font-bold">{[
                           "12ms", "8ms", "15ms", "6ms", "28ms", "14ms", "32ms", "5ms", "42ms", "18ms", "4ms", "Variable", "10ms"
-                        ][activeArchStep]}</p>
-                        <p><span className="text-[#3b82f6]">PACKET_STATUS:</span> <span className="text-[#22C55E] uppercase font-bold">Inbound Success</span></p>
-                        <p className="text-zinc-500">// RUNNING SYSTEM HEURISTICS...</p>
-                        <p className="text-zinc-300">
+                        ][activeArchStep]}</span>
+                      </div>
+                      <div>
+                        <span className="text-[#3b82f6] block mb-1">PACKET_STATUS:</span>
+                        <span className="text-[#22C55E] uppercase font-bold">Inbound Success</span>
+                      </div>
+                      <div>
+                        <span className="text-[#3b82f6] block mb-1">FUNCTION:</span>
+                        <span className="text-zinc-300 block">{[
+                          "4K raw CCTV live capture.",
+                          "Auto-analyzes contrast/blur.",
+                          "Applies night-vision scaling.",
+                          "Calibrates perspective matrix.",
+                          "Segments road users via YOLOv11.",
+                          "Establishes ByteTrack IDs.",
+                          "Runs specialized audits.",
+                          "Filters transient frame noise.",
+                          "OCR-scans license plates.",
+                          "Packs telemetry citation.",
+                          "Calculates risk hazard index.",
+                          "Pushes to verification queue.",
+                          "Populates analytics panel."
+                        ][activeArchStep]}</span>
+                      </div>
+                      <div className="md:col-span-2 lg:col-span-4 border-t border-white/5 pt-3 mt-1">
+                        <span className="text-zinc-500 block mb-1">// SYSTEM HEURISTICS STATUS</span>
+                        <span className="text-zinc-300">
                           {[
                             "Captured frames buffered at 4K @ 60fps.",
                             "Blur score: 0.14 (Compliant). Exposure: 0.78 (Optimal).",
@@ -662,22 +684,22 @@ export default function LandingPage({ onEnterDashboard }: LandingPageProps) {
                             "Queue payload pushed. Officer notification dispatched.",
                             "JSON payload formatted. Dispatched PostgreSQL writing buffers."
                           ][activeArchStep]}
-                        </p>
+                        </span>
                       </div>
                     </div>
                   </div>
-
-                  <div className="bg-[#111827]/70 border border-white/5 rounded-2xl p-4 flex items-center gap-3.5 mt-6 z-10">
-                    <Cpu className="w-5 h-5 text-[#00D4FF] shrink-0" />
-                    <div>
-                      <span className="text-[10px] text-zinc-300 font-mono font-bold uppercase block">Logical Flow state</span>
-                      <span className="text-[10px] text-zinc-500 font-light block leading-relaxed mt-0.5">
-                        Data flows vertically, triggering sequential neural evaluations. Output acts as input for the sibling node.
-                      </span>
-                    </div>
-                  </div>
-
                 </div>
+
+                <div className="bg-[#111827]/70 border border-white/5 rounded-2xl p-4 flex items-center gap-3.5 mt-6 z-10">
+                  <Cpu className="w-5 h-5 text-[#00D4FF] shrink-0" />
+                  <div>
+                    <span className="text-[10px] text-zinc-300 font-mono font-bold uppercase block">Logical Flow state</span>
+                    <span className="text-[10px] text-zinc-500 font-light block leading-relaxed mt-0.5">
+                      Data flows horizontally, triggering sequential neural evaluations. Output acts as input for the sibling node.
+                    </span>
+                  </div>
+                </div>
+
               </div>
             )}
 
