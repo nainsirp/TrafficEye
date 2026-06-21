@@ -582,27 +582,63 @@ export default function LandingPage({ onEnterDashboard }: LandingPageProps) {
                 let desktopStyle = {};
                 
                 if (idx === 3 || idx === 7 || idx === 11) {
-                  // Down arrow pointing down to next row
-                  desktopStyle = { left: "50%", top: "calc(100% + 32px)", transform: "translate(-50%, -50%)" };
+                  // Down arrow: connects row to row
+                  // The space between rows is 64px (gap-y-16).
+                  desktopStyle = {
+                    position: "absolute",
+                    left: "50%",
+                    top: "100%",
+                    width: "24px",
+                    height: "64px",
+                    transform: "translateX(-50%)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center"
+                  };
                   desktopIcon = (
-                    <svg className="w-9 h-9 text-[#00D4FF] drop-shadow-[0_0_8px_rgba(0,212,255,0.8)] animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
+                    <svg width="24" height="100%" viewBox="0 0 24 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="animate-pulse">
+                      <path d="M 12 4 V 56" stroke="#00D4FF" strokeWidth="3.5" strokeLinecap="round" className="drop-shadow-[0_0_8px_rgba(0,212,255,0.8)]" />
+                      <path d="M 6 48 L 12 56 L 18 48" stroke="#00D4FF" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" className="drop-shadow-[0_0_8px_rgba(0,212,255,0.8)]" />
                     </svg>
                   );
                 } else if (idx === 4 || idx === 5 || idx === 6) {
                   // Left arrow flowing right-to-left
-                  desktopStyle = { right: "calc(100% + 56px)", top: "50%", transform: "translate(50%, -50%)" };
+                  // The space between columns is 112px (gap-x-28).
+                  desktopStyle = {
+                    position: "absolute",
+                    right: "100%",
+                    top: "50%",
+                    width: "112px",
+                    height: "24px",
+                    transform: "translateY(-50%)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center"
+                  };
                   desktopIcon = (
-                    <svg className="w-9 h-9 text-[#00D4FF] drop-shadow-[0_0_8px_rgba(0,212,255,0.8)] animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                    <svg width="100%" height="24" viewBox="0 0 112 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="animate-pulse">
+                      <path d="M 104 12 H 8" stroke="#00D4FF" strokeWidth="3.5" strokeLinecap="round" className="drop-shadow-[0_0_8px_rgba(0,212,255,0.8)]" />
+                      <path d="M 16 6 L 8 12 L 16 18" stroke="#00D4FF" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" className="drop-shadow-[0_0_8px_rgba(0,212,255,0.8)]" />
                     </svg>
                   );
                 } else {
                   // Right arrow flowing left-to-right (idx: 0, 1, 2, 8, 9, 10)
-                  desktopStyle = { left: "calc(100% + 56px)", top: "50%", transform: "translate(-50%, -50%)" };
+                  // The space between columns is 112px (gap-x-28).
+                  desktopStyle = {
+                    position: "absolute",
+                    left: "100%",
+                    top: "50%",
+                    width: "112px",
+                    height: "24px",
+                    transform: "translateY(-50%)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center"
+                  };
                   desktopIcon = (
-                    <svg className="w-9 h-9 text-[#00D4FF] drop-shadow-[0_0_8px_rgba(0,212,255,0.8)] animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5-7.5M21 12H3" />
+                    <svg width="100%" height="24" viewBox="0 0 112 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="animate-pulse">
+                      <path d="M 8 12 H 104" stroke="#00D4FF" strokeWidth="3.5" strokeLinecap="round" className="drop-shadow-[0_0_8px_rgba(0,212,255,0.8)]" />
+                      <path d="M 96 6 L 104 12 L 96 18" stroke="#00D4FF" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" className="drop-shadow-[0_0_8px_rgba(0,212,255,0.8)]" />
                     </svg>
                   );
                 }
@@ -641,15 +677,15 @@ export default function LandingPage({ onEnterDashboard }: LandingPageProps) {
                             onClick={() => setActiveArchStep(stepIdx)}
                             className={`w-full flex items-center gap-2.5 py-3 px-4 rounded-xl border transition-all cursor-pointer text-left h-full
                               ${isActive 
-                                ? "bg-[#00D4FF]/10 border-[#00D4FF]/40 text-white shadow-[0_0_15px_rgba(0,212,255,0.15)]" 
-                                : "bg-white/5 border-transparent text-zinc-400 hover:text-white"
+                                ? "bg-[#00D4FF]/20 border-[#00D4FF]/60 text-white shadow-[0_0_20px_rgba(0,212,255,0.25)]" 
+                                : "bg-zinc-900/60 border-white/10 text-zinc-200 hover:border-[#00D4FF]/50 hover:bg-[#00D4FF]/5 hover:text-white"
                               }
                             `}
                           >
                             <span className={`w-5.5 h-5.5 rounded-full flex items-center justify-center text-[10px] font-bold font-mono shrink-0
                               ${isActive 
-                                ? "bg-gradient-to-tr from-[#00D4FF] to-[#3B82F6] text-[#0B1020]" 
-                                : "bg-zinc-900 border border-white/10 text-zinc-400"
+                                ? "bg-gradient-to-tr from-[#00D4FF] to-[#3B82F6] text-[#0B1020] font-black" 
+                                : "bg-zinc-800 border border-white/20 text-zinc-300"
                               }
                             `}>
                               {stepIdx + 1}
@@ -672,15 +708,15 @@ export default function LandingPage({ onEnterDashboard }: LandingPageProps) {
                             onClick={() => setActiveArchStep(idx)}
                             className={`w-full flex items-center gap-2.5 py-3 px-4 rounded-xl border transition-all cursor-pointer text-left
                               ${isActive 
-                                ? "bg-[#00D4FF]/10 border-[#00D4FF]/40 text-white shadow-[0_0_15px_rgba(0,212,255,0.15)]" 
-                                : "bg-white/5 border-transparent text-zinc-400 hover:text-white"
+                                ? "bg-[#00D4FF]/20 border-[#00D4FF]/60 text-white shadow-[0_0_20px_rgba(0,212,255,0.25)]" 
+                                : "bg-zinc-900/60 border-white/10 text-zinc-200 hover:border-[#00D4FF]/50 hover:bg-[#00D4FF]/5 hover:text-white"
                               }
                             `}
                           >
                             <span className={`w-5.5 h-5.5 rounded-full flex items-center justify-center text-[10px] font-bold font-mono shrink-0
                               ${isActive 
-                                ? "bg-gradient-to-tr from-[#00D4FF] to-[#3B82F6] text-[#0B1020]" 
-                                : "bg-zinc-900 border border-white/10 text-zinc-400"
+                                ? "bg-gradient-to-tr from-[#00D4FF] to-[#3B82F6] text-[#0B1020] font-black" 
+                                : "bg-zinc-800 border border-white/20 text-zinc-300"
                               }
                             `}>
                               {idx + 1}
