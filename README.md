@@ -2,7 +2,7 @@
 
 Traffic-Eye AI is a next-generation municipal smart city traffic governance platform. Powered by state-of-the-art computer vision models, explainable AI (XAI), and real-time simulations, Traffic-Eye automates vehicle detection, tracking, license plate recognition, violation classification, and predictive flow analysis.
 
-[Live Demo](https://nainsirp.github.io/TrafficEye/) • [Documentation](https://nainsirp.github.io/TrafficEye/#architecture) • [Control Center Dashboard](https://nainsirp.github.io/TrafficEye/)
+[Live Demo](https://nainsirp.github.io/TrafficEye/)
 
 ---
 
