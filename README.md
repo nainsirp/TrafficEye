@@ -118,6 +118,3 @@ The project is configured with GitHub Actions. Any commit pushed to the `main` b
 
 ---
 
-## 📄 License & Terms
-
-This project is licensed under municipal traffic governance templates and terms. Contact `gov-licensing@trafficeye.ai` for system integration keys or demonstration licensing.
